@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" fill="none">
+  <rect width="32" height="32" rx="7" fill="#0F172A"/>
+  <!-- Keyline Two-Tone Compass / Navigation Mark -->
+  <circle cx="16" cy="16" r="10" stroke="#007AFF" stroke-width="2" fill="#007AFF" fill-opacity="0.2"/>
+  <polygon points="16,9 19,16 16,23 13,16" stroke="#FFFFFF" stroke-width="1.5" fill="#007AFF"/>
+  <circle cx="16" cy="16" r="1.5" fill="#FFFFFF"/>
+</svg>

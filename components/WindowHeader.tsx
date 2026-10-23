@@ -1,0 +1,149 @@
+'use client';
+
+import React from 'react';
+import {
+  Search,
+  Grid2x2,
+  Table,
+  Download,
+  X,
+  SlidersHorizontal,
+  ChevronDown,
+  Compass,
+} from '@/components/icons/KeylineIcons';
+import { SortField, ViewMode } from '@/lib/types';
+
+interface WindowHeaderProps {
+  searchQuery: string;
+  onSearchChange: (query: string) => void;
+  viewMode: ViewMode;
+  onViewModeChange: (mode: ViewMode) => void;
+  sortField: SortField;
+  onSortFieldChange: (field: SortField) => void;
+  onExportClick: () => void;
+  inspectorOpen: boolean;
+  onToggleInspector: () => void;
+  totalResults: number;
+}
+
+export function WindowHeader({
+  searchQuery,
+  onSearchChange,
+  viewMode,
+  onViewModeChange,
+  sortField,
+  onSortFieldChange,
+  onExportClick,
+  inspectorOpen,
+  onToggleInspector,
+  totalResults,
+}: WindowHeaderProps) {
+  return (
+    <header className="h-14 border-b border-[#E5E5EA] bg-[#FFFFFF] px-4 flex items-center justify-between gap-4 select-none">
+      {/* Left: Traffic Lights & Title */}
+      <div className="flex items-center space-x-3.5 min-w-[240px]">
+        <div className="flex items-center space-x-1.5">
+          <span className="w-3 h-3 rounded-full bg-[#FF5F56] border border-[#E0443E]/50 inline-block"></span>
+          <span className="w-3 h-3 rounded-full bg-[#FFBD2E] border border-[#DEA123]/50 inline-block"></span>
+          <span className="w-3 h-3 rounded-full bg-[#27C93F] border border-[#1AAB29]/50 inline-block"></span>
+        </div>
+
+        <div className="flex items-center space-x-2">
+          <div className="flex items-center space-x-1 px-1.5 py-0.5 rounded bg-[#F1F5F9] border border-[#E2E8F0]">
+            <Compass className="w-3.5 h-3.5 text-[#007AFF]" />
+            <span className="font-bold text-[11px] text-[#0F172A] tracking-wider uppercase">APPLE</span>
+          </div>
+          <span className="font-semibold text-xs text-[#0F172A] tracking-tight">Navigation Library</span>
+          <span className="font-mono text-[11px] text-[#64748B]">({totalResults.toLocaleString()} docs)</span>
+        </div>
+      </div>
+
+      {/* Center: Search Field with Keyline Search */}
+      <div className="flex-1 max-w-lg relative">
+        <div className="relative flex items-center">
+          <Search className="w-4 h-4 text-[#8E8E93] absolute left-3 pointer-events-none" />
+          <input
+            type="text"
+            value={searchQuery}
+            onChange={(e) => onSearchChange(e.target.value)}
+            placeholder="Search 5,219 docs by title, ID (DTS/TP), topic, or URL path..."
+            className="w-full h-9 pl-9 pr-8 text-xs bg-[#F2F2F7] hover:bg-[#E5E5EA]/70 focus:bg-[#FFFFFF] border border-transparent focus:border-[#007AFF] rounded-lg transition outline-none text-[#0F172A] placeholder-[#8E8E93]"
+          />
+          {searchQuery && (
+            <button
+              onClick={() => onSearchChange('')}
+              className="absolute right-2.5 p-0.5 rounded-full hover:bg-[#E5E5EA] text-[#8E8E93]"
+            >
+              <X className="w-3.5 h-3.5" />
+            </button>
+          )}
+        </div>
+      </div>
+
+      {/* Right: Controls & Toggles */}
+      <div className="flex items-center space-x-2">
+        {/* Sort Selector */}
+        <div className="relative">
+          <select
+            value={sortField}
+            onChange={(e) => onSortFieldChange(e.target.value as SortField)}
+            className="h-8 pl-2.5 pr-7 text-xs bg-[#F2F2F7] hover:bg-[#E5E5EA] border border-[#E5E5EA] rounded-md font-medium text-[#0F172A] outline-none appearance-none cursor-pointer transition"
+          >
+            <option value="date_desc">Date (Newest First)</option>
+            <option value="date_asc">Date (Oldest First)</option>
+            <option value="title_asc">Title (A to Z)</option>
+            <option value="title_desc">Title (Z to A)</option>
+            <option value="id_asc">Apple ID (Ascending)</option>
+          </select>
+          <ChevronDown className="w-3 h-3 text-[#64748B] absolute right-2 top-2.5 pointer-events-none" />
+        </div>
+
+        {/* View Switcher with Keyline Icons */}
+        <div className="flex items-center bg-[#F2F2F7] p-0.5 rounded-md border border-[#E5E5EA]">
+          <button
+            onClick={() => onViewModeChange('table')}
+            className={`p-1.5 rounded transition ${
+              viewMode === 'table' ? 'bg-white text-[#0F172A] shadow-xs' : 'text-[#8E8E93] hover:text-[#0F172A]'
+            }`}
+            title="Table View"
+          >
+            <Table className="w-3.5 h-3.5" />
+          </button>
+          <button
+            onClick={() => onViewModeChange('cards')}
+            className={`p-1.5 rounded transition ${
+              viewMode === 'cards' ? 'bg-white text-[#0F172A] shadow-xs' : 'text-[#8E8E93] hover:text-[#0F172A]'
+            }`}
+            title="Cards Grid View"
+          >
+            <Grid2x2 className="w-3.5 h-3.5" />
+          </button>
+        </div>
+
+        {/* Export Data */}
+        <button
+          onClick={onExportClick}
+          className="h-8 px-2.5 bg-[#F2F2F7] hover:bg-[#E5E5EA] border border-[#E5E5EA] rounded-md text-xs font-medium text-[#0F172A] flex items-center space-x-1.5 transition"
+          title="Export Filtered Data"
+        >
+          <Download className="w-3.5 h-3.5 text-[#64748B]" />
+          <span>Export</span>
+        </button>
+
+        {/* Toggle Inspector Pane */}
+        <button
+          onClick={onToggleInspector}
+          className={`h-8 px-2.5 rounded-md text-xs font-medium flex items-center space-x-1.5 transition border ${
+            inspectorOpen
+              ? 'bg-[#007AFF] text-white border-[#007AFF]'
+              : 'bg-[#F2F2F7] hover:bg-[#E5E5EA] text-[#0F172A] border-[#E5E5EA]'
+          }`}
+          title="Toggle Contextual Inspector"
+        >
+          <SlidersHorizontal className="w-3.5 h-3.5" />
+          <span className="hidden sm:inline">Inspector</span>
+        </button>
+      </div>
+    </header>
+  );
+}
