@@ -312,7 +312,7 @@ export function Sidebar({
       <div className="p-3 border-t border-[#E5E5EA] text-[11px] text-[#8E8E93] bg-[#FAFCFF]">
         <div className="flex items-center space-x-1.5">
           <FolderCheck className="w-3.5 h-3.5 text-[#34C759]" />
-          <span>Cloudflare Workers Pipeline</span>
+          <span>Archive Navigation Pipeline</span>
         </div>
       </div>
     </aside>
