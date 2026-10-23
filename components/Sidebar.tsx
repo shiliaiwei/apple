@@ -68,12 +68,12 @@ export function Sidebar({
   }, [topics, topicSearch]);
 
   return (
-    <aside className="w-64 min-w-[256px] border-r border-[#E5E5EA] bg-[#F9FAFB] flex flex-col h-full select-none">
+    <aside className="w-64 min-w-[256px] liquid-glass-sidebar flex flex-col h-full select-none z-10">
       {/* Brand & Sync Status */}
-      <div className="p-4 border-b border-[#E5E5EA]">
+      <div className="p-4 border-b border-slate-200/60">
         <div className="flex items-center justify-between mb-2">
           <div className="flex items-center space-x-2">
-            <div className="w-7 h-7 rounded-lg bg-[#0F172A] text-white flex items-center justify-center font-bold text-xs tracking-tighter shadow-xs">
+            <div className="w-7 h-7 rounded-lg liquid-glass-button bg-[#0F172A] text-white flex items-center justify-center font-bold text-xs tracking-tighter">
               <Compass className="w-4 h-4 text-[#007AFF]" />
             </div>
             <div>
@@ -85,7 +85,7 @@ export function Sidebar({
             onClick={onRefresh}
             disabled={isLoading}
             title="Fetch real-time data from Apple"
-            className="p-1 rounded text-[#64748B] hover:text-[#0F172A] hover:bg-[#E5E5EA] transition disabled:opacity-50"
+            className="p-1.5 rounded-lg liquid-glass-button text-[#64748B] hover:text-[#0F172A] disabled:opacity-50 cursor-pointer"
           >
             <RefreshCw className={`w-3.5 h-3.5 ${isLoading ? 'animate-spin text-[#007AFF]' : ''}`} />
           </button>
@@ -93,7 +93,7 @@ export function Sidebar({
 
         <div className="flex items-center justify-between text-[11px] text-[#64748B]">
           <span className="inline-flex items-center space-x-1 font-mono">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#34C759]"></span>
+            <span className="w-1.5 h-1.5 rounded-full bg-[#34C759] shadow-xs"></span>
             <span>REAL-TIME STREAM</span>
           </span>
           <span className="font-mono text-[#0F172A] font-semibold">{totalDocuments.toLocaleString()}</span>
@@ -109,12 +109,12 @@ export function Sidebar({
       {/* Filter Controls & Actions */}
       <div className="flex-1 overflow-y-auto p-3 space-y-4 text-xs text-[#0F172A]">
         {hasActiveFilters && (
-          <div className="bg-[#FFFFFF] border border-[#E5E5EA] rounded-lg p-2.5 shadow-xs">
+          <div className="liquid-glass-card rounded-xl p-2.5">
             <div className="flex items-center justify-between mb-1">
               <span className="font-semibold text-[11px] uppercase tracking-wider text-[#64748B]">Active Filter</span>
               <button
                 onClick={onResetFilters}
-                className="text-[11px] text-[#007AFF] hover:underline flex items-center space-x-1"
+                className="text-[11px] text-[#007AFF] hover:underline flex items-center space-x-1 cursor-pointer"
               >
                 <X className="w-3 h-3" />
                 <span>Reset</span>
@@ -132,19 +132,19 @@ export function Sidebar({
             <Layers className="w-3 h-3 text-[#007AFF]" />
             <span>Target Platform</span>
           </div>
-          <div className="space-y-0.5">
+          <div className="space-y-1">
             <button
               onClick={() => onSelectPlatform('')}
-              className={`w-full flex items-center justify-between px-2.5 py-1.5 rounded-md text-left transition ${
+              className={`w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg text-left transition cursor-pointer ${
                 !selectedPlatform
-                  ? 'bg-[#007AFF] text-white font-medium'
-                  : 'hover:bg-[#E5E5EA] text-[#0F172A]'
+                  ? 'liquid-glass-primary font-medium'
+                  : 'hover:bg-white/80 text-[#0F172A]'
               }`}
             >
               <span className="truncate">All Platforms</span>
               <span
                 className={`text-[10px] font-mono px-1.5 py-0.5 rounded ${
-                  !selectedPlatform ? 'bg-[#0062CC] text-white' : 'bg-[#E5E5EA] text-[#64748B]'
+                  !selectedPlatform ? 'bg-[#0052B3] text-white' : 'bg-slate-200/70 text-[#64748B]'
                 }`}
               >
                 {totalDocuments.toLocaleString()}
@@ -160,19 +160,19 @@ export function Sidebar({
                 <button
                   key={plat}
                   onClick={() => onSelectPlatform(isSelected ? '' : plat)}
-                  className={`w-full flex items-center justify-between px-2.5 py-1.5 rounded-md text-left transition ${
+                  className={`w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg text-left transition cursor-pointer ${
                     isSelected
-                      ? 'bg-[#007AFF] text-white font-medium'
-                      : 'hover:bg-[#E5E5EA] text-[#0F172A]'
+                      ? 'liquid-glass-primary font-medium'
+                      : 'hover:bg-white/80 text-[#0F172A]'
                   }`}
                 >
                   <span className="truncate flex items-center space-x-1.5">
-                    <IconComponent className="w-3 h-3 opacity-70" />
+                    <IconComponent className="w-3 h-3 opacity-80" />
                     <span>{plat}</span>
                   </span>
                   <span
                     className={`text-[10px] font-mono px-1.5 py-0.5 rounded ${
-                      isSelected ? 'bg-[#0062CC] text-white' : 'bg-[#E5E5EA] text-[#64748B]'
+                      isSelected ? 'bg-[#0052B3] text-white' : 'bg-slate-200/70 text-[#64748B]'
                     }`}
                   >
                     {count.toLocaleString()}
@@ -189,19 +189,19 @@ export function Sidebar({
             <Tag className="w-3 h-3 text-[#10B981]" />
             <span>Resource Types</span>
           </div>
-          <div className="space-y-0.5">
+          <div className="space-y-1">
             <button
               onClick={() => onSelectType('')}
-              className={`w-full flex items-center justify-between px-2.5 py-1.5 rounded-md text-left transition ${
+              className={`w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg text-left transition cursor-pointer ${
                 !selectedType
-                  ? 'bg-[#007AFF] text-white font-medium'
-                  : 'hover:bg-[#E5E5EA] text-[#0F172A]'
+                  ? 'liquid-glass-primary font-medium'
+                  : 'hover:bg-white/80 text-[#0F172A]'
               }`}
             >
               <span className="truncate">All Types</span>
               <span
                 className={`text-[10px] font-mono px-1.5 py-0.5 rounded ${
-                  !selectedType ? 'bg-[#0062CC] text-white' : 'bg-[#E5E5EA] text-[#64748B]'
+                  !selectedType ? 'bg-[#0052B3] text-white' : 'bg-slate-200/70 text-[#64748B]'
                 }`}
               >
                 {totalDocuments.toLocaleString()}
@@ -214,16 +214,16 @@ export function Sidebar({
                 <button
                   key={rt.key}
                   onClick={() => onSelectType(isSelected ? '' : rt.name)}
-                  className={`w-full flex items-center justify-between px-2.5 py-1.5 rounded-md text-left transition ${
+                  className={`w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg text-left transition cursor-pointer ${
                     isSelected
-                      ? 'bg-[#007AFF] text-white font-medium'
-                      : 'hover:bg-[#E5E5EA] text-[#0F172A]'
+                      ? 'liquid-glass-primary font-medium'
+                      : 'hover:bg-white/80 text-[#0F172A]'
                   }`}
                 >
                   <span className="truncate pr-1">{rt.name}</span>
                   <span
                     className={`text-[10px] font-mono px-1.5 py-0.5 rounded shrink-0 ${
-                      isSelected ? 'bg-[#0062CC] text-white' : 'bg-[#E5E5EA] text-[#64748B]'
+                      isSelected ? 'bg-[#0052B3] text-white' : 'bg-slate-200/70 text-[#64748B]'
                     }`}
                   >
                     {rt.count.toLocaleString()}
@@ -249,31 +249,31 @@ export function Sidebar({
                 value={topicSearch}
                 onChange={(e) => setTopicSearch(e.target.value)}
                 placeholder="Find topic..."
-                className="w-full h-7 pl-7 pr-6 text-[11px] bg-[#FFFFFF] border border-[#E5E5EA] focus:border-[#007AFF] rounded-md outline-none text-[#0F172A]"
+                className="w-full h-7 pl-7 pr-6 text-[11px] liquid-glass-input rounded-md outline-none text-[#0F172A]"
               />
               {topicSearch && (
                 <button
                   onClick={() => setTopicSearch('')}
-                  className="absolute right-2.5 top-2 text-[#94A3B8] hover:text-[#0F172A]"
+                  className="absolute right-2.5 top-2 text-[#94A3B8] hover:text-[#0F172A] cursor-pointer"
                 >
                   <X className="w-3 h-3" />
                 </button>
               )}
             </div>
 
-            <div className="space-y-0.5 max-h-56 overflow-y-auto pr-0.5">
+            <div className="space-y-1 max-h-56 overflow-y-auto pr-0.5">
               <button
                 onClick={() => onSelectTopic('')}
-                className={`w-full flex items-center justify-between px-2.5 py-1.5 rounded-md text-left transition ${
+                className={`w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg text-left transition cursor-pointer ${
                   !selectedTopic
-                    ? 'bg-[#007AFF] text-white font-medium'
-                    : 'hover:bg-[#E5E5EA] text-[#0F172A]'
+                    ? 'liquid-glass-primary font-medium'
+                    : 'hover:bg-white/80 text-[#0F172A]'
                 }`}
               >
                 <span className="truncate">All Topics</span>
                 <span
                   className={`text-[10px] font-mono px-1.5 py-0.5 rounded ${
-                    !selectedTopic ? 'bg-[#0062CC] text-white' : 'bg-[#E5E5EA] text-[#64748B]'
+                    !selectedTopic ? 'bg-[#0052B3] text-white' : 'bg-slate-200/70 text-[#64748B]'
                   }`}
                 >
                   {totalDocuments.toLocaleString()}
@@ -286,16 +286,16 @@ export function Sidebar({
                   <button
                     key={tp.key}
                     onClick={() => onSelectTopic(isSelected ? '' : tp.name)}
-                    className={`w-full flex items-center justify-between px-2.5 py-1.5 rounded-md text-left transition ${
+                    className={`w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg text-left transition cursor-pointer ${
                       isSelected
-                        ? 'bg-[#007AFF] text-white font-medium'
-                        : 'hover:bg-[#E5E5EA] text-[#0F172A]'
+                        ? 'liquid-glass-primary font-medium'
+                        : 'hover:bg-white/80 text-[#0F172A]'
                     }`}
                   >
                     <span className="truncate pr-1 text-[11px]">{tp.name}</span>
                     <span
                       className={`text-[10px] font-mono px-1.5 py-0.5 rounded shrink-0 ${
-                        isSelected ? 'bg-[#0062CC] text-white' : 'bg-[#E5E5EA] text-[#64748B]'
+                        isSelected ? 'bg-[#0052B3] text-white' : 'bg-slate-200/70 text-[#64748B]'
                       }`}
                     >
                       {tp.count.toLocaleString()}
@@ -309,7 +309,7 @@ export function Sidebar({
       </div>
 
       {/* Footer Info */}
-      <div className="p-3 border-t border-[#E5E5EA] text-[11px] text-[#8E8E93] bg-[#FAFCFF]">
+      <div className="p-3 border-t border-slate-200/60 text-[11px] text-[#8E8E93]">
         <div className="flex items-center space-x-1.5">
           <FolderCheck className="w-3.5 h-3.5 text-[#34C759]" />
           <span>Archive Navigation Pipeline</span>

@@ -152,7 +152,7 @@ export default function Home() {
   }, [data?.documents, selectedPlatform, selectedType, selectedEra, selectedTopic, searchQuery, sortField]);
 
   return (
-    <div className="flex h-screen w-screen overflow-hidden bg-white text-[#0F172A] antialiased select-text">
+    <div className="flex h-screen w-screen overflow-hidden bg-gradient-to-br from-[#F8FAFC] via-[#F1F5F9] to-[#E2E8F0] text-[#0F172A] antialiased select-text">
       {/* 3-Column macOS Architecture */}
 
       {/* Column 1: Vibrant Sidebar */}

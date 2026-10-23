@@ -36,26 +36,26 @@ export function DocumentList({
   const getTypeBadgeClass = (typeName: string) => {
     switch (typeName) {
       case 'Sample Code':
-        return 'bg-[#EFF6FF] text-[#1D4ED8] border-[#BFDBFE]';
+        return 'bg-[#EFF6FF]/80 text-[#1D4ED8] border-[#BFDBFE]';
       case 'Technical Q&As':
-        return 'bg-[#FFF1F2] text-[#BE123C] border-[#FECDD3]';
+        return 'bg-[#FFF1F2]/80 text-[#BE123C] border-[#FECDD3]';
       case 'Guides':
-        return 'bg-[#ECFDF5] text-[#047857] border-[#A7F3D0]';
+        return 'bg-[#ECFDF5]/80 text-[#047857] border-[#A7F3D0]';
       case 'Technical Notes':
-        return 'bg-[#FFFBEB] text-[#B45309] border-[#FDE68A]';
+        return 'bg-[#FFFBEB]/80 text-[#B45309] border-[#FDE68A]';
       case 'Articles':
-        return 'bg-[#F5F3FF] text-[#6D28D9] border-[#DDD6FE]';
+        return 'bg-[#F5F3FF]/80 text-[#6D28D9] border-[#DDD6FE]';
       default:
-        return 'bg-[#F1F5F9] text-[#334155] border-[#E2E8F0]';
+        return 'bg-[#F1F5F9]/80 text-[#334155] border-[#E2E8F0]';
     }
   };
 
   const getPlatformBadgeClass = (platform: string) => {
-    if (platform.includes('iOS')) return 'bg-[#007AFF]/10 text-[#007AFF] border-[#007AFF]/20';
-    if (platform.includes('macOS')) return 'bg-[#6366F1]/10 text-[#6366F1] border-[#6366F1]/20';
-    if (platform.includes('watchOS')) return 'bg-[#FF9500]/10 text-[#FF9500] border-[#FF9500]/20';
-    if (platform.includes('tvOS')) return 'bg-[#EC4899]/10 text-[#EC4899] border-[#EC4899]/20';
-    return 'bg-[#64748B]/10 text-[#64748B] border-[#64748B]/20';
+    if (platform.includes('iOS')) return 'bg-[#007AFF]/10 text-[#007AFF] border-[#007AFF]/25';
+    if (platform.includes('macOS')) return 'bg-[#6366F1]/10 text-[#6366F1] border-[#6366F1]/25';
+    if (platform.includes('watchOS')) return 'bg-[#FF9500]/10 text-[#FF9500] border-[#FF9500]/25';
+    if (platform.includes('tvOS')) return 'bg-[#EC4899]/10 text-[#EC4899] border-[#EC4899]/25';
+    return 'bg-[#64748B]/10 text-[#64748B] border-[#64748B]/25';
   };
 
   const toggleSort = (field: 'date' | 'title' | 'id') => {
@@ -70,11 +70,11 @@ export function DocumentList({
   };
 
   return (
-    <div className="flex-1 flex flex-col h-full overflow-hidden bg-white">
+    <div className="flex-1 flex flex-col h-full overflow-hidden bg-transparent">
       {/* Table Content */}
       <div className="flex-1 overflow-auto">
         <table className="w-full text-left border-collapse text-xs">
-          <thead className="sticky top-0 bg-[#F9FAFB] border-b border-[#E5E5EA] text-[#64748B] font-semibold select-none z-10">
+          <thead className="sticky top-0 liquid-glass-surface border-b border-slate-200/60 text-[#64748B] font-semibold select-none z-10">
             <tr>
               <th className="py-2.5 px-3 w-12 text-center font-mono">#</th>
               <th
@@ -110,7 +110,7 @@ export function DocumentList({
               <th className="py-2.5 px-3 w-20 text-center">Action</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-[#E5E5EA]">
+          <tbody className="divide-y divide-slate-200/50 bg-white/60 backdrop-blur-sm">
             {currentDocs.length === 0 ? (
               <tr>
                 <td colSpan={8} className="py-16 text-center text-[#8E8E93]">
@@ -126,7 +126,9 @@ export function DocumentList({
                     key={doc.index}
                     onClick={() => onSelectDoc(doc)}
                     className={`cursor-pointer transition group ${
-                      isSelected ? 'bg-[#007AFF]/10 hover:bg-[#007AFF]/15' : 'hover:bg-[#F8FAFC]'
+                      isSelected
+                        ? 'bg-[#007AFF]/12 font-medium shadow-[inset_2px_0_0_#007AFF]'
+                        : 'hover:bg-white/80'
                     }`}
                   >
                     <td className="py-2.5 px-3 text-center font-mono text-[#8E8E93] text-[11px]">
@@ -146,14 +148,14 @@ export function DocumentList({
                     </td>
 
                     <td className="py-2.5 px-3 font-mono text-[11px] text-[#475569]">
-                      <span className="px-1.5 py-0.5 rounded bg-[#F1F5F9] border border-[#E2E8F0]">
+                      <span className="px-2 py-0.5 rounded-md liquid-glass-badge bg-white/80">
                         {doc.id}
                       </span>
                     </td>
 
                     <td className="py-2.5 px-3">
                       <span
-                        className={`inline-block px-2 py-0.5 rounded-full text-[11px] font-medium border ${getTypeBadgeClass(
+                        className={`inline-block px-2.5 py-0.5 rounded-full text-[11px] font-medium border liquid-glass-badge ${getTypeBadgeClass(
                           doc.typeName
                         )}`}
                       >
@@ -166,7 +168,7 @@ export function DocumentList({
                         {doc.platformList.slice(0, 2).map((p) => (
                           <span
                             key={p}
-                            className={`inline-block px-1.5 py-0.5 rounded text-[10px] font-medium border ${getPlatformBadgeClass(
+                            className={`inline-block px-2 py-0.5 rounded-md text-[10px] font-medium border liquid-glass-badge ${getPlatformBadgeClass(
                               p
                             )}`}
                           >
@@ -195,7 +197,7 @@ export function DocumentList({
                             onSelectDoc(doc);
                           }}
                           title="Inspect document"
-                          className="p-1 rounded hover:bg-[#E2E8F0] text-[#64748B] hover:text-[#0F172A]"
+                          className="p-1 rounded-md liquid-glass-button text-[#64748B] hover:text-[#0F172A] cursor-pointer"
                         >
                           <Eye className="w-3.5 h-3.5" />
                         </button>
@@ -207,7 +209,7 @@ export function DocumentList({
                             rel="noopener noreferrer"
                             onClick={(e) => e.stopPropagation()}
                             title="Open in Apple Archive"
-                            className="p-1 rounded hover:bg-[#E2E8F0] text-[#007AFF]"
+                            className="p-1 rounded-md liquid-glass-button text-[#007AFF] cursor-pointer"
                           >
                             <ExternalLink className="w-3.5 h-3.5" />
                           </a>
@@ -222,8 +224,8 @@ export function DocumentList({
         </table>
       </div>
 
-      {/* Pagination Footer */}
-      <div className="h-12 border-t border-[#E5E5EA] bg-[#F9FAFB] px-4 flex items-center justify-between text-xs text-[#64748B] select-none">
+      {/* Pagination Footer with Liquid Glass */}
+      <div className="h-12 border-t border-slate-200/60 liquid-glass-surface px-4 flex items-center justify-between text-xs text-[#64748B] select-none z-10">
         <div className="flex items-center space-x-3">
           <span>
             Showing <strong className="text-[#0F172A]">{startIndex + 1}</strong> to{' '}
@@ -239,7 +241,7 @@ export function DocumentList({
                 onPageSizeChange(Number(e.target.value));
                 onPageChange(1);
               }}
-              className="bg-white border border-[#E5E5EA] rounded px-1.5 py-0.5 font-mono text-xs text-[#0F172A]"
+              className="liquid-glass-button rounded-md px-2 py-0.5 font-mono text-xs text-[#0F172A] cursor-pointer"
             >
               <option value={25}>25</option>
               <option value={50}>50</option>
@@ -253,7 +255,7 @@ export function DocumentList({
           <button
             onClick={() => onPageChange(currentPage - 1)}
             disabled={currentPage <= 1}
-            className="px-2.5 py-1 rounded bg-white border border-[#E5E5EA] disabled:opacity-40 hover:bg-[#F1F5F9] transition"
+            className="px-3 py-1 rounded-lg liquid-glass-button disabled:opacity-40 cursor-pointer"
           >
             Previous
           </button>
@@ -265,7 +267,7 @@ export function DocumentList({
           <button
             onClick={() => onPageChange(currentPage + 1)}
             disabled={currentPage >= totalPages}
-            className="px-2.5 py-1 rounded bg-white border border-[#E5E5EA] disabled:opacity-40 hover:bg-[#F1F5F9] transition"
+            className="px-3 py-1 rounded-lg liquid-glass-button disabled:opacity-40 cursor-pointer"
           >
             Next
           </button>

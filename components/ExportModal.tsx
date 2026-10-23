@@ -54,15 +54,15 @@ export function ExportModal({ isOpen, onClose, filteredDocuments }: ExportModalP
   };
 
   return (
-    <div className="fixed inset-0 z-50 bg-black/40 backdrop-blur-xs flex items-center justify-center p-4">
-      <div className="bg-white rounded-2xl shadow-2xl border border-[#E5E5EA] w-full max-w-md overflow-hidden animate-in fade-in zoom-in-95 duration-150">
+    <div className="fixed inset-0 z-50 bg-black/30 backdrop-blur-md flex items-center justify-center p-4">
+      <div className="liquid-glass-dialog rounded-3xl w-full max-w-md overflow-hidden animate-in fade-in zoom-in-95 duration-150">
         {/* Header */}
-        <div className="p-4 border-b border-[#E5E5EA] flex items-center justify-between bg-[#F9FAFB]">
+        <div className="p-4 border-b border-slate-200/60 flex items-center justify-between liquid-glass-surface">
           <div className="flex items-center space-x-2">
             <Download className="w-4 h-4 text-[#007AFF]" />
             <h3 className="font-semibold text-sm text-[#0F172A]">Export Dataset</h3>
           </div>
-          <button onClick={onClose} className="p-1 rounded hover:bg-[#E5E5EA] text-[#64748B]">
+          <button onClick={onClose} className="p-1.5 rounded-lg liquid-glass-button text-[#64748B] hover:text-[#0F172A] cursor-pointer">
             <X className="w-4 h-4" />
           </button>
         </div>
@@ -79,7 +79,7 @@ export function ExportModal({ isOpen, onClose, filteredDocuments }: ExportModalP
             {/* JSON Option */}
             <button
               onClick={exportAsJson}
-              className="p-4 rounded-xl border border-[#E2E8F0] hover:border-[#007AFF] bg-[#F8FAFC] hover:bg-white text-left transition group flex flex-col justify-between"
+              className="p-4 rounded-2xl liquid-glass-card text-left transition group flex flex-col justify-between cursor-pointer"
             >
               <div>
                 <FileText className="w-6 h-6 text-[#007AFF] mb-2" />
@@ -88,7 +88,7 @@ export function ExportModal({ isOpen, onClose, filteredDocuments }: ExportModalP
                   Full structured objects with raw data arrays and unescaped HTML strings.
                 </div>
               </div>
-              <div className="mt-4 pt-2 border-t border-[#E2E8F0] font-medium text-[11px] text-[#007AFF] flex items-center space-x-1">
+              <div className="mt-4 pt-2 border-t border-slate-200/50 font-medium text-[11px] text-[#007AFF] flex items-center space-x-1">
                 {downloaded === 'json' ? (
                   <>
                     <CircleCheck className="w-3.5 h-3.5 text-[#34C759]" />
@@ -103,7 +103,7 @@ export function ExportModal({ isOpen, onClose, filteredDocuments }: ExportModalP
             {/* CSV Option */}
             <button
               onClick={exportAsCsv}
-              className="p-4 rounded-xl border border-[#E2E8F0] hover:border-[#007AFF] bg-[#F8FAFC] hover:bg-white text-left transition group flex flex-col justify-between"
+              className="p-4 rounded-2xl liquid-glass-card text-left transition group flex flex-col justify-between cursor-pointer"
             >
               <div>
                 <FileText className="w-6 h-6 text-[#10B981] mb-2" />
@@ -112,7 +112,7 @@ export function ExportModal({ isOpen, onClose, filteredDocuments }: ExportModalP
                   Tabular spreadsheet format compatible with Excel, Numbers, and Google Sheets.
                 </div>
               </div>
-              <div className="mt-4 pt-2 border-t border-[#E2E8F0] font-medium text-[11px] text-[#10B981] flex items-center space-x-1">
+              <div className="mt-4 pt-2 border-t border-slate-200/50 font-medium text-[11px] text-[#10B981] flex items-center space-x-1">
                 {downloaded === 'csv' ? (
                   <>
                     <CircleCheck className="w-3.5 h-3.5 text-[#34C759]" />
@@ -127,10 +127,10 @@ export function ExportModal({ isOpen, onClose, filteredDocuments }: ExportModalP
         </div>
 
         {/* Footer */}
-        <div className="p-3 bg-[#F9FAFB] border-t border-[#E5E5EA] flex justify-end">
+        <div className="p-3 border-t border-slate-200/60 liquid-glass-surface flex justify-end">
           <button
             onClick={onClose}
-            className="px-4 py-1.5 rounded-lg border border-[#CBD5E1] bg-white hover:bg-[#F1F5F9] text-xs font-medium text-[#475569] transition"
+            className="px-4 py-1.5 rounded-lg liquid-glass-button text-xs font-medium text-[#475569] cursor-pointer"
           >
             Close
           </button>

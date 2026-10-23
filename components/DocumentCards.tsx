@@ -32,29 +32,29 @@ export function DocumentCards({
   const getTypeBadgeClass = (typeName: string) => {
     switch (typeName) {
       case 'Sample Code':
-        return 'bg-[#EFF6FF] text-[#1D4ED8] border-[#BFDBFE]';
+        return 'bg-[#EFF6FF]/80 text-[#1D4ED8] border-[#BFDBFE]';
       case 'Technical Q&As':
-        return 'bg-[#FFF1F2] text-[#BE123C] border-[#FECDD3]';
+        return 'bg-[#FFF1F2]/80 text-[#BE123C] border-[#FECDD3]';
       case 'Guides':
-        return 'bg-[#ECFDF5] text-[#047857] border-[#A7F3D0]';
+        return 'bg-[#ECFDF5]/80 text-[#047857] border-[#A7F3D0]';
       case 'Technical Notes':
-        return 'bg-[#FFFBEB] text-[#B45309] border-[#FDE68A]';
+        return 'bg-[#FFFBEB]/80 text-[#B45309] border-[#FDE68A]';
       case 'Articles':
-        return 'bg-[#F5F3FF] text-[#6D28D9] border-[#DDD6FE]';
+        return 'bg-[#F5F3FF]/80 text-[#6D28D9] border-[#DDD6FE]';
       default:
-        return 'bg-[#F1F5F9] text-[#334155] border-[#E2E8F0]';
+        return 'bg-[#F1F5F9]/80 text-[#334155] border-[#E2E8F0]';
     }
   };
 
   return (
-    <div className="flex-1 flex flex-col h-full overflow-hidden bg-[#F8FAFC]">
+    <div className="flex-1 flex flex-col h-full overflow-hidden bg-transparent">
       <div className="flex-1 overflow-y-auto p-4">
         {currentDocs.length === 0 ? (
           <div className="h-64 flex items-center justify-center text-[#8E8E93] text-xs">
             No Apple library documents match your active search or filters.
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5">
             {currentDocs.map((doc) => {
               const isSelected = selectedDoc?.index === doc.index;
 
@@ -62,24 +62,24 @@ export function DocumentCards({
                 <div
                   key={doc.index}
                   onClick={() => onSelectDoc(doc)}
-                  className={`p-4 rounded-xl border bg-white cursor-pointer transition flex flex-col justify-between ${
+                  className={`p-4 rounded-2xl cursor-pointer flex flex-col justify-between ${
                     isSelected
-                      ? 'border-[#007AFF] ring-2 ring-[#007AFF]/20 shadow-xs'
-                      : 'border-[#E5E5EA] hover:border-[#CBD5E1]'
+                      ? 'liquid-glass-card-selected'
+                      : 'liquid-glass-card'
                   }`}
                 >
                   <div>
                     {/* Top Badges */}
-                    <div className="flex items-center justify-between gap-2 mb-2">
+                    <div className="flex items-center justify-between gap-2 mb-2.5">
                       <span
-                        className={`inline-block px-2 py-0.5 rounded-full text-[10px] font-medium border ${getTypeBadgeClass(
+                        className={`inline-block px-2.5 py-0.5 rounded-full text-[10px] font-medium border liquid-glass-badge ${getTypeBadgeClass(
                           doc.typeName
                         )}`}
                       >
                         {doc.typeName}
                       </span>
 
-                      <span className="font-mono text-[10px] text-[#64748B] px-1.5 py-0.5 bg-[#F1F5F9] rounded border border-[#E2E8F0]">
+                      <span className="font-mono text-[10px] text-[#64748B] px-2 py-0.5 rounded-md liquid-glass-badge bg-white/70">
                         {doc.id}
                       </span>
                     </div>
@@ -91,22 +91,22 @@ export function DocumentCards({
 
                     {/* Topic */}
                     {doc.topicName && (
-                      <div className="text-xs text-[#64748B] flex items-center space-x-1 mb-2">
-                        <Tag className="w-3 h-3 text-[#94A3B8]" />
+                      <div className="text-xs text-[#64748B] flex items-center space-x-1.5 mb-2">
+                        <Tag className="w-3.5 h-3.5 text-[#94A3B8]" />
                         <span className="truncate">{doc.topicName}</span>
                       </div>
                     )}
                   </div>
 
                   {/* Card Bottom Meta */}
-                  <div className="pt-3 mt-2 border-t border-[#F1F5F9] flex items-center justify-between text-xs text-[#8E8E93]">
+                  <div className="pt-3 mt-2 border-t border-slate-200/50 flex items-center justify-between text-xs text-[#8E8E93]">
                     <div className="flex items-center space-x-1 font-mono text-[11px]">
-                      <Calendar className="w-3 h-3 text-[#94A3B8]" />
+                      <Calendar className="w-3.5 h-3.5 text-[#94A3B8]" />
                       <span>{doc.date}</span>
                     </div>
 
                     <div className="flex items-center space-x-2">
-                      <span className="text-[10px] font-mono uppercase bg-[#F1F5F9] text-[#475569] px-1.5 py-0.5 rounded">
+                      <span className="text-[10px] font-mono uppercase liquid-glass-badge bg-white/80 text-[#475569] px-2 py-0.5 rounded-md">
                         {doc.platformList[0] || 'ALL'}
                       </span>
 
@@ -117,7 +117,7 @@ export function DocumentCards({
                           rel="noopener noreferrer"
                           onClick={(e) => e.stopPropagation()}
                           title="Open Apple Archive Documentation"
-                          className="text-[#007AFF] hover:underline"
+                          className="text-[#007AFF] hover:underline p-1 rounded-md hover:bg-black/5"
                         >
                           <ExternalLink className="w-3.5 h-3.5" />
                         </a>
@@ -131,8 +131,8 @@ export function DocumentCards({
         )}
       </div>
 
-      {/* Pagination Footer */}
-      <div className="h-12 border-t border-[#E5E5EA] bg-white px-4 flex items-center justify-between text-xs text-[#64748B] select-none">
+      {/* Pagination Footer with Liquid Glass */}
+      <div className="h-12 border-t border-slate-200/60 liquid-glass-surface px-4 flex items-center justify-between text-xs text-[#64748B] select-none z-10">
         <div className="flex items-center space-x-3">
           <span>
             Showing <strong className="text-[#0F172A]">{startIndex + 1}</strong> to{' '}
@@ -148,7 +148,7 @@ export function DocumentCards({
                 onPageSizeChange(Number(e.target.value));
                 onPageChange(1);
               }}
-              className="bg-white border border-[#E5E5EA] rounded px-1.5 py-0.5 font-mono text-xs text-[#0F172A]"
+              className="liquid-glass-button rounded-md px-2 py-0.5 font-mono text-xs text-[#0F172A] cursor-pointer"
             >
               <option value={24}>24</option>
               <option value={48}>48</option>
@@ -161,7 +161,7 @@ export function DocumentCards({
           <button
             onClick={() => onPageChange(currentPage - 1)}
             disabled={currentPage <= 1}
-            className="px-2.5 py-1 rounded bg-white border border-[#E5E5EA] disabled:opacity-40 hover:bg-[#F1F5F9] transition"
+            className="px-3 py-1 rounded-lg liquid-glass-button disabled:opacity-40 cursor-pointer"
           >
             Previous
           </button>
@@ -173,7 +173,7 @@ export function DocumentCards({
           <button
             onClick={() => onPageChange(currentPage + 1)}
             disabled={currentPage >= totalPages}
-            className="px-2.5 py-1 rounded bg-white border border-[#E5E5EA] disabled:opacity-40 hover:bg-[#F1F5F9] transition"
+            className="px-3 py-1 rounded-lg liquid-glass-button disabled:opacity-40 cursor-pointer"
           >
             Next
           </button>
