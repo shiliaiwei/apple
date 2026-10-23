@@ -9,6 +9,7 @@ import { DocumentList } from '@/components/DocumentList';
 import { DocumentCards } from '@/components/DocumentCards';
 import { DocumentInspector } from '@/components/DocumentInspector';
 import { ExportModal } from '@/components/ExportModal';
+import { DisclaimerModal } from '@/components/DisclaimerModal';
 import { RefreshCw } from '@/components/icons/KeylineIcons';
 
 export default function Home() {
@@ -29,6 +30,7 @@ export default function Home() {
   const [selectedDoc, setSelectedDoc] = useState<AppleDocument | null>(null);
   const [inspectorOpen, setInspectorOpen] = useState(true);
   const [exportModalOpen, setExportModalOpen] = useState(false);
+  const [disclaimerModalOpen, setDisclaimerModalOpen] = useState(false);
 
   // Pagination
   const [currentPage, setCurrentPage] = useState(1);
@@ -171,6 +173,7 @@ export default function Home() {
         onSelectTopic={setSelectedTopic}
         onResetFilters={handleResetFilters}
         onRefresh={() => fetchData(true)}
+        onDisclaimerClick={() => setDisclaimerModalOpen(true)}
         lastFetchedAt={data?.meta?.fetchedAt}
       />
 
@@ -187,6 +190,7 @@ export default function Home() {
           onExportClick={() => setExportModalOpen(true)}
           inspectorOpen={inspectorOpen}
           onToggleInspector={() => setInspectorOpen((prev) => !prev)}
+          onDisclaimerClick={() => setDisclaimerModalOpen(true)}
           totalResults={filteredDocuments.length}
         />
 
@@ -274,6 +278,12 @@ export default function Home() {
         isOpen={exportModalOpen}
         onClose={() => setExportModalOpen(false)}
         filteredDocuments={filteredDocuments}
+      />
+
+      {/* Credits & Legal Disclaimer Modal */}
+      <DisclaimerModal
+        isOpen={disclaimerModalOpen}
+        onClose={() => setDisclaimerModalOpen(false)}
       />
     </div>
   );

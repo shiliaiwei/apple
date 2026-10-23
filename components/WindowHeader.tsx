@@ -10,6 +10,7 @@ import {
   SlidersHorizontal,
   ChevronDown,
   Compass,
+  ShieldCheck,
 } from '@/components/icons/KeylineIcons';
 import { SortField, ViewMode } from '@/lib/types';
 
@@ -23,6 +24,7 @@ interface WindowHeaderProps {
   onExportClick: () => void;
   inspectorOpen: boolean;
   onToggleInspector: () => void;
+  onDisclaimerClick?: () => void;
   totalResults: number;
 }
 
@@ -36,6 +38,7 @@ export function WindowHeader({
   onExportClick,
   inspectorOpen,
   onToggleInspector,
+  onDisclaimerClick,
   totalResults,
 }: WindowHeaderProps) {
   return (
@@ -128,6 +131,16 @@ export function WindowHeader({
         >
           <Download className="w-3.5 h-3.5 text-[#64748B]" />
           <span>Export</span>
+        </button>
+
+        {/* Credits & Legal Disclaimer */}
+        <button
+          onClick={onDisclaimerClick}
+          className="h-8 px-2.5 liquid-glass-button rounded-lg text-xs font-medium text-[#475569] hover:text-[#0F172A] flex items-center space-x-1.5 cursor-pointer"
+          title="Credits & Legal Disclaimer"
+        >
+          <ShieldCheck className="w-3.5 h-3.5 text-[#007AFF]" />
+          <span className="hidden md:inline">Disclaimer</span>
         </button>
 
         {/* Toggle Inspector Pane */}

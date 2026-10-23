@@ -31,6 +31,8 @@ import {
   Smartphone,
   Watch,
   Tv,
+  Info,
+  ShieldCheck,
 } from '@keyline-icons/react/two-tone';
 
 export {
@@ -65,4 +67,6 @@ export {
   Smartphone,
   Watch,
   Tv,
+  Info,
+  ShieldCheck,
 };

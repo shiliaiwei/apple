@@ -14,6 +14,7 @@ import {
   Tv,
   Tag,
   Layers,
+  ShieldCheck,
 } from '@/components/icons/KeylineIcons';
 
 interface SidebarProps {
@@ -31,6 +32,7 @@ interface SidebarProps {
   onSelectTopic: (topic: string) => void;
   onResetFilters: () => void;
   onRefresh: () => void;
+  onDisclaimerClick?: () => void;
   lastFetchedAt?: string;
 }
 
@@ -49,6 +51,7 @@ export function Sidebar({
   onSelectTopic,
   onResetFilters,
   onRefresh,
+  onDisclaimerClick,
   lastFetchedAt,
 }: SidebarProps) {
   const [topicSearch, setTopicSearch] = useState('');
@@ -308,11 +311,24 @@ export function Sidebar({
         )}
       </div>
 
-      {/* Footer Info */}
-      <div className="p-3 border-t border-slate-200/60 text-[11px] text-[#8E8E93]">
-        <div className="flex items-center space-x-1.5">
-          <FolderCheck className="w-3.5 h-3.5 text-[#34C759]" />
-          <span>Archive Navigation Pipeline</span>
+      {/* Footer Info & Legal Notice */}
+      <div className="p-3 border-t border-slate-200/60 text-[11px] text-[#8E8E93] space-y-1.5">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center space-x-1.5">
+            <FolderCheck className="w-3.5 h-3.5 text-[#34C759]" />
+            <span className="font-medium text-[#475569]">Archive Pipeline</span>
+          </div>
+          <button
+            onClick={onDisclaimerClick}
+            className="text-[10px] text-[#007AFF] hover:underline flex items-center space-x-1 cursor-pointer font-medium"
+            title="Read Legal Disclaimer & Credits"
+          >
+            <ShieldCheck className="w-3 h-3" />
+            <span>Disclaimer</span>
+          </button>
+        </div>
+        <div className="text-[10px] text-[#94A3B8] leading-tight">
+          Independent educational index. Not affiliated with Apple Inc.
         </div>
       </div>
     </aside>
